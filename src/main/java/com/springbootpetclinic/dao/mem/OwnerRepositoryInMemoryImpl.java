@@ -13,6 +13,7 @@ public class OwnerRepositoryInMemoryImpl implements OwnerRepository {
     private Map<Long, Owner> ownersMap = new HashMap<>();
 
     public OwnerRepositoryInMemoryImpl() {
+
         Owner owner1 = new Owner();
         owner1.setId(1L);
         owner1.setFirstName("Muhammed");
