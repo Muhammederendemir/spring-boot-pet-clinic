@@ -20,6 +20,8 @@
         <td>LastName</td>
     </tr>
     </thead>
+
+
     <c:forEach items="${owners}" var="owner" varStatus="status">
         <tr bgcolor=${status.index % 2 ==0 ? 'white':'lightgray'}>
             <td>${owner.id}</td>
