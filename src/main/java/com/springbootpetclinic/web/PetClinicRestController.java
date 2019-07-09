@@ -1,5 +1,6 @@
 package com.springbootpetclinic.web;
 
+import com.springbootpetclinic.exception.InternalServerException;
 import com.springbootpetclinic.exception.OwnerNotFoundException;
 import com.springbootpetclinic.model.Owner;
 import com.springbootpetclinic.service.PetClinicService;
@@ -77,9 +78,9 @@ public class PetClinicRestController {
             petClinicService.deleteOwner(id);
             return ResponseEntity.ok().build();
         } catch (OwnerNotFoundException ex) {
-            return ResponseEntity.notFound().build();
+            throw ex;
         } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            throw new InternalServerException(ex);
         }
     }
 }

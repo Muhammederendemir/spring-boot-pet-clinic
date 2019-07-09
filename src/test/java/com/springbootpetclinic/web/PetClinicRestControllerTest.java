@@ -7,6 +7,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.net.URI;
@@ -83,8 +84,8 @@ public class PetClinicRestControllerTest {
         try {
             Owner owner = restTemplate.getForObject("http://localhost:8080/rest/owner/2", Owner.class);// id si 2 olan owner bilgilerini cekiyorum
             Assert.fail("should have not returned owner ");
-        } catch (Exception ex) {
-
+        } catch (HttpClientErrorException ex) {
+            MatcherAssert.assertThat(ex.getStatusCode().value(), Matchers.equalTo(404));
         }
 
     }
