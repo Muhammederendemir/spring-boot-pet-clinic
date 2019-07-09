@@ -3,6 +3,7 @@ package com.springbootpetclinic.web;
 import com.springbootpetclinic.model.Owner;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.http.ResponseEntity;
@@ -74,6 +75,17 @@ public class PetClinicRestControllerTest {
 
         owner = restTemplate.getForObject("http://localhost:8080/rest/owner/1", Owner.class);
         MatcherAssert.assertThat(owner.getFirstName(), Matchers.equalTo("Eren"));
+    }
+
+    @Test
+    public void testDeleteOnwer() {
+        restTemplate.delete("http://localhost:8080/rest/owner/2");// id'si 2 olan owner siliniyor
+        try {
+            Owner owner = restTemplate.getForObject("http://localhost:8080/rest/owner/2", Owner.class);// id si 2 olan owner bilgilerini cekiyorum
+            Assert.fail("should have not returned owner ");
+        } catch (Exception ex) {
+
+        }
 
     }
 }
