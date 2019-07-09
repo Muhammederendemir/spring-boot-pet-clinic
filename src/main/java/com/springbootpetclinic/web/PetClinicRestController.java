@@ -6,6 +6,9 @@ import com.springbootpetclinic.model.Owner;
 import com.springbootpetclinic.service.PetClinicService;
 import com.sun.org.apache.xerces.internal.util.URI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Link;
+import org.springframework.hateoas.Resource;
+import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -81,6 +84,22 @@ public class PetClinicRestController {
             throw ex;
         } catch (Exception ex) {
             throw new InternalServerException(ex);
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.GET, value = "/owner/{id}", produces = "application/json")
+    public ResponseEntity<?> getOnwerAsHateosResource(@PathVariable Long id) {
+        try {
+            Owner owner = petClinicService.findOwner(id);
+            Link self = ControllerLinkBuilder.linkTo(PetClinicRestController.class).slash("/owner/" + id).withSelfRel();
+            Link create = ControllerLinkBuilder.linkTo(PetClinicRestController.class).slash("/owner").withRel("create");
+            Link update = ControllerLinkBuilder.linkTo(PetClinicRestController.class).slash("/owner/" + id).withRel("update");
+            Link delete = ControllerLinkBuilder.linkTo(PetClinicRestController.class).slash("/owner/" + id).withRel("delete");
+
+            Resource<Owner> resource = new Resource<Owner>(owner, self, create, update, delete);
+            return ResponseEntity.ok(resource);
+        } catch (OwnerNotFoundException ex) {
+            return ResponseEntity.notFound().build();
         }
     }
 }
