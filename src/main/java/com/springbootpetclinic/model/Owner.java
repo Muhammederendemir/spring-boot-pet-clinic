@@ -1,15 +1,19 @@
 package com.springbootpetclinic.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.util.HashSet;
 import java.util.Set;
 
 @Data                            //getter setter toString metotlar için
 @AllArgsConstructor             //tüm field ile constructor
 @NoArgsConstructor
+@XmlRootElement
 public class Owner {
     private Long id;
     private String firstName;
@@ -40,6 +44,8 @@ public class Owner {
         this.lastName = lastName;
     }
 
+    @XmlTransient//haric birakmak için
+    @JsonIgnore
     public Set<Pet> getPets() {
         return pets;
     }
