@@ -10,7 +10,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @EnableConfigurationProperties(value = PetClinicProperties.class)
 public class SpringBootPetClinicApplication {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         SpringApplication.run(SpringBootPetClinicApplication.class, args);
     }
 

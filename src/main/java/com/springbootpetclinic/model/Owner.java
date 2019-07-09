@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Data                            //getter setter toString metotlar için
 @AllArgsConstructor             //tüm field ile constructor
 @NoArgsConstructor
@@ -11,7 +14,7 @@ public class Owner {
     private Long id;
     private String firstName;
     private String lastName;
-    private Owner owner;
+    private Set<Pet> pets = new HashSet<>();
 
     public Long getId() {
         return id;
@@ -37,11 +40,21 @@ public class Owner {
         this.lastName = lastName;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public Set<Pet> getPets() {
+        return pets;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
+    public void setPets(Set<Pet> pets) {
+        this.pets = pets;
+    }
+
+    @Override
+    public String toString() {
+        return "Owner{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", pets=" + pets +
+                '}';
     }
 }

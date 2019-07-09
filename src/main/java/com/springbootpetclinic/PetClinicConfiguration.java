@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 
 @Configuration
 public class PetClinicConfiguration {
+
     @Autowired
     private PetClinicProperties petClinicProperties;
 

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Example</title>
+    <link rel="stylesheet" th:href="@{/css/petclinic.css}" type="text/css">
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <td>ID</td>
+        <td>FİRST NAME</td>
+        <td>LAST NAME</td>
+    </tr>
+    </thead>
+
+
+    <!--/*@thymesVar id="owners" type="com"*/-->
+    <th:block th:each="owner:${owners}">
+        <tr>
+            <th: text="${owner.id}"/>
+            <th: text="${owner.lastName}"/>
+            <th text="" ${owner.lastName}></th>
+        </tr>
+    </th:block>
+</table>
+</body>
+</html>

@@ -5,8 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Data                            //getter setter toString metotlar için
 @AllArgsConstructor             //tüm field ile constructor
@@ -15,6 +13,37 @@ public class Pet {
     private Long id;
     private String name;
     private Date birthDate;
-    private Set<Pet> pets = new HashSet<>();
+    private Owner owner;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
 }
