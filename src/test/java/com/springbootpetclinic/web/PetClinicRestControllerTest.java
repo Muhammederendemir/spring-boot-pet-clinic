@@ -8,6 +8,7 @@ import org.junit.Test;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -48,5 +49,20 @@ public class PetClinicRestControllerTest {
         // herbır map'in içerisinden lastName eriserek bir string listesine ekliyoruz.
 
         MatcherAssert.assertThat(firstNames, Matchers.containsInAnyOrder("Muhammed,Ahmet,Yunus,Bekir"));//Listenin içerisinde var mı sorusu
+    }
+
+    @Test
+    public void testCreateOwner() {
+        Owner owner = new Owner();
+        owner.setFirstName("Mustafa");
+        owner.setLastName("Karacuha");
+        URI location = restTemplate.postForLocation("http://localhost:8080/rest/owner", owner);// nesneyi sunucu tarafında insert ediyoruz
+
+        Owner owner1 = restTemplate.getForObject(location, Owner.class);//yeni oluşan owner nesnesine erisiyoruz.
+        System.out.println(owner1.toString());
+
+        MatcherAssert.assertThat(owner1.getFirstName(), Matchers.equalTo(owner.getFirstName()));
+        MatcherAssert.assertThat(owner1.getLastName(), Matchers.equalTo(owner.getLastName()));
+
     }
 }

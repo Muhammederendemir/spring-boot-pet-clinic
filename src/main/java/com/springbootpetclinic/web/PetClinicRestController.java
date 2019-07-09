@@ -3,9 +3,12 @@ package com.springbootpetclinic.web;
 import com.springbootpetclinic.exception.OwnerNotFoundException;
 import com.springbootpetclinic.model.Owner;
 import com.springbootpetclinic.service.PetClinicService;
+import com.sun.org.apache.xerces.internal.util.URI;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -38,6 +41,18 @@ public class PetClinicRestController {
             return ResponseEntity.ok(owner);
         } catch (OwnerNotFoundException ex) {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "/owner")
+    public ResponseEntity<URI> createOwner(@RequestBody Owner owner) {
+        try {
+            petClinicService.createOwner(owner);
+            Long id = owner.getId();
+            java.net.URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(id).toUri();
+            return ResponseEntity.created(location).build();
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }
