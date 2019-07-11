@@ -9,8 +9,8 @@ import java.util.List;
 
 @Service //Spring konteyerın ilgili sınıftan bir tane bean yaratmasını sağlar
 public class PetClinicServiceImpl implements PetClinicService {
-    private OwnerRepository ownerRepository;
 
+    private OwnerRepository ownerRepository;
 
     //@Autowired//Bu anatasyon sayesinde Spring koyternır OwnerRepository tipindeki bir beanı PetClinic Beanı içerisine setter vasıtası ile enjekte edilir.
     public PetClinicServiceImpl(OwnerRepository ownerRepository) {
