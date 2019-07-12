@@ -11,8 +11,9 @@
 <body>
 <h1>PetClinic Login Page </h1>
 <form action="login" method="POST">
-    username: <input type="text" name="username"> <br><br>
-    password: <input type="password" name="password">
+    Username: <input type="text" name="username"> <br><br>
+    Password: <input type="password" name="password"><br><br>
+    Remember me: <input type="checkbox" name="remember-me"><br>
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
     <br><br>
     <input type="submit" value="Login"/>
