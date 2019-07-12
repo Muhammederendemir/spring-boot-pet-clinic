@@ -13,7 +13,7 @@ public interface PetRepository {
 
     Pet update(Pet pet);
 
-    void delete();
+    void delete(Long id);
 
     void deleteByOwnerId(Long ownerId);
 }

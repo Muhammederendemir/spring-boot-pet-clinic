@@ -35,7 +35,7 @@ public class PetRepositoryJdbcImpl implements PetRepository {
     }
 
     @Override
-    public void delete() {
+    public void delete(Long id) {
 
     }
 

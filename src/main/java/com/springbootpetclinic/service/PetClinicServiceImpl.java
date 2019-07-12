@@ -6,12 +6,13 @@ import com.springbootpetclinic.exception.OwnerNotFoundException;
 import com.springbootpetclinic.model.Owner;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service //Spring konteyerın ilgili sınıftan bir tane bean yaratmasını sağlar
-@Transactional //bu sınıfa ait butun public metotlar transactional olacak
+@Transactional(rollbackFor = Exception.class) //bu sınıfa ait butun public metotlar transactional olacak
 public class PetClinicServiceImpl implements PetClinicService {
 
     private OwnerRepository ownerRepository;
@@ -29,16 +30,19 @@ public class PetClinicServiceImpl implements PetClinicService {
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Owner> findOwners() {
         return ownerRepository.findAll();
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public List<Owner> findOwners(String lastName) {
         return ownerRepository.findByLastName(lastName);
     }
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
     public Owner findOwner(Long id) throws OwnerNotFoundException {
         Owner owner = ownerRepository.findById(id);
         if (owner == null) throw new OwnerNotFoundException("Owner not found with id: " + id);

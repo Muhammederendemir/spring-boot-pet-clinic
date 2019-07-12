@@ -12,7 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-@Repository("ownerRepository") //
+
+//@Repository("ownerRepository") // jpa da kullandığım için kapattım
+@Repository
 public class OwnerRepositoryJdbcImpl implements OwnerRepository {
 
     @Autowired
