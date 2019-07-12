@@ -10,8 +10,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //Kimlik doğrulama işlemi yapmadan ulaşılabilecek uzantılar
-        http.authorizeRequests().antMatchers("/**/favicon.ico", "/css/**", "/js/**", "/image/**").permitAll();
+        http.authorizeRequests().antMatchers("/**/favicon.ico", "/css/**", "/js/**", "/image/**", "/login.html/**").permitAll();
         http.authorizeRequests().anyRequest().authenticated();//kimlik doğrulama yapmamaızı ister
-        http.formLogin();//login sayfasına yönlendirir
+        http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").failureUrl("/login.html?loginFailed=true");//login sayfasına yönlendirir
     }
 }

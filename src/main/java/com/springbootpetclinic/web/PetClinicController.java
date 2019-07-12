@@ -26,4 +26,18 @@ public class PetClinicController {
     public String welcome() {
         return "PetClinic uygulaması";
     }
+
+    @RequestMapping("/login.html")
+    public ModelAndView login() {
+        ModelAndView mav = new ModelAndView();
+        return mav;
+    }
+
+
+    @RequestMapping({"/", "/index.html"})
+    public ModelAndView index() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("index");
+        return mav;
+    }
 }
