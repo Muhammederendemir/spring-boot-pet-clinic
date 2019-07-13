@@ -21,6 +21,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //Kimlik doğrulama işlemi yapmadan ulaşılabilecek uzantılar
         http.authorizeRequests().antMatchers("/**/favicon.ico", "/css/**", "/js/**", "/image/**", "/login.html/**").permitAll();
+        http.authorizeRequests().antMatchers("/rest/**").access("hasRole('EDITOR')");//rest ile başlayan pahtşere sadece EDITOR rolune sahip kisiler erisebilir.
+        http.authorizeRequests().antMatchers("/actuator/**").access("hasRole('ADMIN')");
         http.authorizeRequests().anyRequest().authenticated();//kimlik doğrulama yapmamaızı ister
         http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").failureUrl("/login.html?loginFailed=true");//login sayfasına yönlendirir
         http.rememberMe().userDetailsService(userDetailsService);
