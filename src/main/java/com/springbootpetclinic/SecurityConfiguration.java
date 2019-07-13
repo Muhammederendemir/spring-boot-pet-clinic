@@ -19,5 +19,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().anyRequest().authenticated();//kimlik doğrulama yapmamaızı ister
         http.formLogin().loginPage("/login.html").loginProcessingUrl("/login").failureUrl("/login.html?loginFailed=true");//login sayfasına yönlendirir
         http.rememberMe().userDetailsService(userDetailsService);
+        http.httpBasic();
     }
 }
